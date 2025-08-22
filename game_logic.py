@@ -10,7 +10,7 @@ def get_random_word():
 WORDS = ["python", "git", "github", "snowman", "meltdown"]
 
 def display_game_state(mistakes, secret_word, guessed_letters):
-    # Display the snowman stage for the current number of mistakes.
+    """ Display the snowman stage for the current number of mistakes."""
     print(STAGES[mistakes])
     # Build a display version of the secret word.
     display_word = ""
@@ -23,12 +23,18 @@ def display_game_state(mistakes, secret_word, guessed_letters):
     print("\n")
 
 def play_game():
+    """
+    Runs one full round of the Snowman Meltdown game:
+    - Selects a random secret word
+    - Handles user input and validates guesses
+    - Updates and displays game state after each guess
+    - Ends the game with a win or loss message
+    """
     secret_word = get_random_word()
     guessed_letters = []
     mistakes = 0
 
     print("Welcome to Snowman Meltdown!")
-    # For now, display the initial game state.
     display_game_state(mistakes, secret_word, guessed_letters)
 
     # Main game loop
