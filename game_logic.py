@@ -22,7 +22,6 @@ def display_game_state(mistakes, secret_word, guessed_letters):
     print("Word: ", display_word)
     print("\n")
 
-
 def play_game():
     secret_word = get_random_word()
     guessed_letters = []
@@ -32,6 +31,26 @@ def play_game():
     # For now, display the initial game state.
     display_game_state(mistakes, secret_word, guessed_letters)
 
-    # Prompt user for one guess (logic to be enhanced later)
-    guess = input("Guess a letter: ").lower()
-    print("You guessed:", guess)
+    # Main game loop
+    while True:
+        guess = input("Guess a letter: ").lower()
+
+        if guess in guessed_letters:
+            print("You already guessed that letter.")
+            continue
+
+        guessed_letters.append(guess)
+
+        if guess not in secret_word:
+            mistakes += 1
+            print("Wrong guess!")
+
+        display_game_state(mistakes, secret_word, guessed_letters)
+
+        if mistakes >= len(STAGES) - 1:
+            print("Game over! The snowman has melted. The word was:", secret_word)
+            break
+
+        if all(letter in guessed_letters for letter in secret_word):
+            print("Congratulations! You saved the snowman!")
+            break
